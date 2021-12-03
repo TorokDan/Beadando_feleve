@@ -14,26 +14,39 @@ namespace Beadando_feleve
         public Emelet(int[] hovak, int hanyadik)
         {
             Hanyadik = hanyadik;
-            Emberek = new Ember[hovak.Length];
+            Ember[] tmp = new Ember[hovak.Length];
             for (int i = 0; i < hovak.Length; i++)
-                Emberek[i] = new Ember(hanyadik, hovak[i]);
-            Emberek = Rendezes(Emberek);
+                tmp[i] = new Ember(hanyadik, hovak[i]);
+            Rendezes(tmp);
         }
 
-        Ember[] Rendezes(Ember[] emberek)
+        private void Rendezes(Ember[] emberek)
         {
             for (int i = 0; i < emberek.Length; i++)
             {
                 int j = i - 1;
                 Ember seged = emberek[i];
-                while (j >= 0 && emberek[i].Hova < seged.Hova)
+                while (j >= 0 && emberek[j].Hova > seged.Hova)
                 {
                     emberek[j + 1] = emberek[j];
                     j--;
                 }
                 emberek[j + 1] = seged;
             }
-            return emberek;
+            Emberek = emberek;
+        }
+
+        public void BeszalloUtas(Ember ember)
+        {
+            if (Emberek.Length != 0)
+            {
+                Ember[] tmp = new Ember[Emberek.Length - 1];
+                int seged = 0;
+                for (int i = 0; i < Emberek.Length; i++)
+                    if (Emberek[i] != ember)
+                        tmp[seged++] = Emberek[i];
+                Emberek = tmp;
+            }
         }
     }
 }

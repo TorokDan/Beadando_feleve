@@ -21,11 +21,19 @@ namespace Beadando_feleve
                     sorInt[j] = int.Parse(sorString[j]);
                 }
                 Emeletek[i - 1] = new Emelet(sorInt, i - 1);
-                for (int j = 0; j < Emeletek[i-1].Emberek.Length; j++)
-                {
-                    Emeletek[i - 1].Emberek[j] = new Ember(i - 1, int.Parse(adatok[i].Split(" ")[j]));
-                }
             }
+        }
+
+        public void LiftElindul()
+        {
+            Lift.Halad(this);
+        }
+        public bool VanEMegBeszallo()
+        {
+            for (int i = 0; i < Emeletek.Length; i++)
+                if (Emeletek[i].Emberek.Length != 0)
+                    return true;
+            return false;    
         }
     }
 }

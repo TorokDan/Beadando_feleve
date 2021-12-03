@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace Beadando_feleve
 {
@@ -7,27 +8,18 @@ namespace Beadando_feleve
         static void Main(string[] args)
         {
             Epulet epulet = new Epulet("input.txt");
-            for (int i = 0; i < epulet.Emeletek.Length; i++)
+            while (epulet.VanEMegBeszallo())
             {
-                for (int j = 0; j < epulet.Emeletek[i].Emberek.Length; j++)
-                {
-                    Console.Write(i +", " + epulet.Emeletek[i].Emberek[j].Hova + ", ");
-                    Console.Write(epulet.Emeletek[i].Emberek[j].Honnan + "\n");
-                }
+                Console.WriteLine("asd");
+                epulet.LiftElindul();
             }
-            Console.WriteLine();
-            for (int i = 0; i < epulet.Lift.Utasok.Length; i++)
-            {
-                Console.WriteLine(epulet.Lift.Utasok[i]); 
-            }
-            Console.WriteLine(epulet.Emeletek[0]);
-            epulet.Lift.KiszallBeszall(epulet.Emeletek[0], epulet);
-            for (int i = 0; i < epulet.Lift.Utasok.Length; i++)
-            {
-                Console.Write(epulet.Lift.Utasok[i].Honnan + ", ");
-                Console.Write(epulet.Lift.Utasok[i].Hova + "\n");
-            }   
-            ;
+            FilebaIras("output.txt", epulet.Lift.MenetekSzama);
+        }
+        static void FilebaIras(string fileName, int szam)
+        {
+            StreamWriter sw = new StreamWriter(fileName);
+            sw.WriteLine(szam);
+            sw.Close();
         }
     }
 }
